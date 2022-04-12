@@ -4,6 +4,9 @@ Config = Config or {}
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
 
 Config.BossMenus = {
+    ['burgershot'] = {
+        vector3(-1177.857, -895.3328, 13.984732),
+    },
     ['police'] = {
         vector3(461.45, -986.2, 30.73),
     },
@@ -25,6 +28,9 @@ Config.BossMenus = {
 }
 
 Config.BossMenuZones = {
+    ['burgershot'] = {
+        { coords = vector3(-1178.07, -896.11, 13.984732), length = 0.35, width = 0.45, heading = 351.0, minZ = 12.58, maxZ = 14.68 }, -- DONE
+    },
     ['police'] = {
         { coords = vector3(461.45, -986.2, 30.73), length = 0.35, width = 0.45, heading = 351.0, minZ = 30.58, maxZ = 30.68 } ,
     },

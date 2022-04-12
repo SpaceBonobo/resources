@@ -300,25 +300,26 @@ QBCore.Functions.CreateCallback('qb-phone:server:DeclineInvoice', function(sourc
     cb(true, Invoices)
 end)
 
-QBCore.Functions.CreateCallback('qb-phone:server:GetContactPictures', function(source, cb, Chats)
-    for k, v in pairs(Chats) do
-        local Player = QBCore.Functions.GetPlayerByPhone(v.number)
-
-        local query = '%' .. v.number .. '%'
-        local result = MySQL.Sync.fetchAll('SELECT * FROM players WHERE charinfo LIKE ?', {query})
-        if result[1] ~= nil then
-            local MetaData = json.decode(result[1].metadata)
-
-            if MetaData.phone.profilepicture ~= nil then
-                v.picture = MetaData.phone.profilepicture
-            else
-                v.picture = "default"
+QBCore.Functions.CreateCallback('qb-phone:server:GetCurrentLawyers', function(source, cb)
+    local Lawyers = {}
+    for k, v in pairs(QBCore.Functions.GetPlayers()) do
+        local Player = QBCore.Functions.GetPlayer(v)
+        if Player ~= nil then
+            if (Player.PlayerData.job.name == "lawyer" or Player.PlayerData.job.name == "realestate" or
+                Player.PlayerData.job.name == "hayes" or Player.PlayerData.job.name == "taxi" or
+                Player.PlayerData.job.name == "police" or Player.PlayerData.job.name == "ambulance" or
+                Player.PlayerData.job.name == "burgershot" or Player.PlayerData.job.name == "pizzathis" or 
+                Player.PlayerData.job.name == "uwu" or Player.PlayerData.job.name == "bahama" or 
+                Player.PlayerData.job.name == "mechanic") and Player.PlayerData.job.onduty then
+                Lawyers[#Lawyers+1] = {
+                    name = Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname,
+                    phone = Player.PlayerData.charinfo.phone,
+                    typejob = Player.PlayerData.job.name
+                }
             end
         end
     end
-    SetTimeout(100, function()
-        cb(Chats)
-    end)
+    cb(Lawyers)
 end)
 
 QBCore.Functions.CreateCallback('qb-phone:server:GetContactPicture', function(source, cb, Chat)

@@ -268,6 +268,34 @@ QBShared.Jobs = {
             },
         },
 	},
+    ['burgershot'] = {
+		label = 'BurgerShot',
+		defaultDuty = true,
+		offDutyPay = true,
+		grades = {
+			['0'] = {
+				name = 'Recruit',
+				payment = 175
+			},
+			['1'] = {
+				name = 'Crew Member',
+				payment = 185
+			},
+			['2'] = {
+				name = 'Shift Manager',
+				payment = 195
+			},
+			['3'] = {
+				name = 'Manager',
+				payment = 205
+			},
+			['4'] = {
+				name = 'Owner',
+				isboss = true,
+				payment = 215
+			},
+		},
+	},
 	['hotdog'] = {
 		label = 'Hotdog',
 		defaultDuty = true,
